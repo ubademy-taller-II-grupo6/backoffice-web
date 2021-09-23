@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ThemeUbademy } from 'themes/ThemeUbademy';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <div>
+        <ThemeUbademy>
+            <App />
+        </ThemeUbademy>  
+    </div>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
