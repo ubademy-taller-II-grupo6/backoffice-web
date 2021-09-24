@@ -9,7 +9,7 @@ import LogoUbademy from 'assets/images/logoUbademy.png';
 const useStyles : any = makeStyles((theme: Theme) => createStyles({
     root: {
         textAlign: "-webkit-center",
-        marginTop: "10% !important"    
+        marginTop: "7% !important"    
     },
     contentForm: {
         paddingTop: 5,
@@ -38,7 +38,7 @@ export function AccountLayoutAdmin (props: AccountLayoutAdminProps) {
             <ContentLayoutBox />
             <Grid item xs={12}>                
                 <Typography component="div" className={classes.root}>
-                        <Grid container spacing={2} item xs={12} sm={6} md={3} lg={3} className={classes.contentForm}>
+                        <Grid container spacing={3} item xs={12} sm={6} md={3} lg={3} className={classes.contentForm}>
                             <Grid item xs={12} sm={12} md={12} lg={12}>
                                 <img src={LogoUbademy} className={classes.imageLogoUbademy} alt="logoUbademy"></img>
                             </Grid>
