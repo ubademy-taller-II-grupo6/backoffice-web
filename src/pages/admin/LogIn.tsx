@@ -2,7 +2,7 @@ import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, Link } from '@material-ui/core';
 import { ControlledTextField } from 'components/forms/ControlledTextField';
 
 import { AccountLayoutAdmin } from 'layouts/AccountLayoutAdmin';
@@ -36,18 +36,25 @@ export function LogIn () {
         <AccountLayoutAdmin>
             <form onSubmit={handleSubmit(onLoginClick)}>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                    <Grid item xs={12}>
                         <ControlledTextField label="Usuario"
                                             name={LogInFormFields.Usuario}
                                             control={control} />
                     </Grid>
-                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                    <Grid item xs={12}>
                         <ControlledTextField label="Contraseña"
                                             type='password'
                                             name={LogInFormFields.Contraseña}
                                             control={control} />
                     </Grid>
-                    <Grid item xs={12} sm={12} md={12} lg={12}>
+
+                    <Grid item xs={12}>
+                        <Link href="#" color="inherit">
+                            Recuperar contraseña
+                        </Link>
+                    </Grid>
+
+                    <Grid item xs={12}>
                         <Button variant="contained"
                                 color="primary"
                                 size="small"
