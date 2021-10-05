@@ -1,25 +1,31 @@
+import { useState } from 'react';
 import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Button, Grid, Link } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { ControlledTextField } from 'components/forms/ControlledTextField';
+import { LoaderBackdrop } from 'components/loader/LoaderBackdrop';
 
 import { AccountLayoutAdmin } from 'layouts/AccountLayoutAdmin';
+import { HttpUser } from 'http/user/httpUser';
+import { userStorage } from 'userSession/userStorage';
+import { UserSession } from 'types/user/userType';
 
 enum LogInFormFields {
-    Usuario = 'Usuario',
+    Email = 'Email',
     Contraseña = 'Contraseña'
 }
 
 const LogInFormSchema = yup.object().shape({
-    [LogInFormFields.Usuario]: yup.string().email('El campo debe ser un mail válido').required('Campo obligatorio'),
+    [LogInFormFields.Email]: yup.string().email('El campo debe ser un mail válido').required('Campo obligatorio'),
     [LogInFormFields.Contraseña]: yup.string().required('Campo obligatorio')
 })
 
 type LogInFormData = yup.InferType<typeof LogInFormSchema>;
 
 export function LogIn () {
+    const [isLoading, setLoading] = useState<boolean>(false);
 
     const {
         control,
@@ -28,9 +34,17 @@ export function LogIn () {
         resolver: yupResolver(LogInFormSchema),
     });
 
-    const onLoginClick = (data: LogInFormData) : void => {
-        alert(`Ingresaste ${data.Usuario}!`);
-    };
+    async function onLoginClick (data: LogInFormData)  {
+        setLoading(true);
+
+        let response : UserSession = await HttpUser.loginUser(data.Email, data.Contraseña);
+
+        userStorage.save(response.nombre, response.apellido, response.email);
+
+        setLoading(false);
+
+        window.location.href = "/"; // Redirecciona a la pagina de inicio
+    }
 
     return (
         <AccountLayoutAdmin>
@@ -38,7 +52,7 @@ export function LogIn () {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <ControlledTextField label="Usuario"
-                                            name={LogInFormFields.Usuario}
+                                            name={LogInFormFields.Email}
                                             control={control} />
                     </Grid>
                     <Grid item xs={12}>
@@ -49,12 +63,6 @@ export function LogIn () {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <Link href="#" color="inherit">
-                            Recuperar contraseña
-                        </Link>
-                    </Grid>
-
-                    <Grid item xs={12}>
                         <Button variant="contained"
                                 color="primary"
                                 size="small"
@@ -62,6 +70,11 @@ export function LogIn () {
                     </Grid>
                 </Grid>
             </form>
+
+            {
+                isLoading &&
+                    <LoaderBackdrop />
+            }
         </AccountLayoutAdmin>
     ); 
 }
