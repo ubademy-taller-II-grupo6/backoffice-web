@@ -7,7 +7,7 @@ interface UserDataSession {
 class UserStorage {
     keyStorage: string = "userSessionUbademy";
 
-    public save(nombre: string, apellido: string, email: string) : void {
+    public logInUser(nombre: string, apellido: string, email: string) : void {
         
         let userSession: UserDataSession = 
         {
@@ -25,7 +25,7 @@ class UserStorage {
         ) as UserDataSession
     }
     
-    public removeFromStorage() {
+    public logOutUser() {
         localStorage.removeItem(this.keyStorage);
     }
 

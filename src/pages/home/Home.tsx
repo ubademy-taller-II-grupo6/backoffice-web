@@ -1,10 +1,11 @@
-import { userStorage } from 'userSession/userStorage';
+import { HomeLayout } from 'layouts/HomeLayout';
 
 export function Home() {
     return (
-        <div>
-            <h1>{userStorage.getFullName()}</h1>
-            <button onClick={() => { userStorage.removeFromStorage(); window.location.href = "/login"}}>Salir</button>
-        </div>
+        <HomeLayout>
+            <div>
+                <h4>Home</h4>
+            </div>
+        </HomeLayout>
     );
 }

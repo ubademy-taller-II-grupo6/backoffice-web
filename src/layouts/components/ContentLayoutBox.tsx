@@ -1,7 +1,7 @@
 import { Box, Grid } from '@material-ui/core';
 
 export function ContentLayoutBox () {
-    const listColor : string[] = ['#94C0C0', '#FFBA67', '#B3A580', '#76CE86'];
+    const listColor : string[] = ['#C1E0F2', '#82C1E7', '#C1E0F2', '#82C1E7'];
 
     return (
         <Grid container item xs={12}>

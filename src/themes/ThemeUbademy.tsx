@@ -9,6 +9,18 @@ const theme = createTheme ({
         '"sans-serif"',
         ].join(','),
     },
+
+    components: {
+        
+        MuiAppBar: {
+            styleOverrides: {
+                root: {
+                    color: 'black',
+                    backgroundColor: 'white',
+                },
+            },
+        },
+    },    
 });
 
 export interface ThemeUbademyProps{

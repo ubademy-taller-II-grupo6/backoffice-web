@@ -39,7 +39,7 @@ export function LogIn () {
 
         let response : UserSession = await HttpUser.loginUser(data.Email, data.Contraseña);
 
-        userStorage.save(response.nombre, response.apellido, response.email);
+        userStorage.logInUser(response.nombre, response.apellido, response.email);
 
         setLoading(false);
 
