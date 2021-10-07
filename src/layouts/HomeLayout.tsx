@@ -18,6 +18,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { UserOptionMenu } from './components/UserOptionMenu';
 import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
+import LogoUbademy from 'assets/images/logoUbademy.png';
 
 const drawerWidthOpen = 220;
 
@@ -68,13 +69,22 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
 }));
 
+const DrawerEnd = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    justifyContent: 'flex-end',
+    placeItems: 'flex-end',
+    marginTop: 'auto'
+}));
+
 interface HomeLayoutProps {
     children?: React.ReactNode
 }
 
 export function HomeLayout(props: HomeLayoutProps) {
     const theme = useTheme();
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -125,9 +135,9 @@ export function HomeLayout(props: HomeLayoutProps) {
                 open={open}
             >
                 <DrawerHeader>
-                <IconButton onClick={handleDrawerClose} style={{color: "#a2a3b7"}}>
-                    {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                </IconButton>
+                    <IconButton onClick={handleDrawerClose} style={{color: "#a2a3b7"}}>
+                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                    </IconButton>
                 </DrawerHeader>
                 <Divider />
                 <List>
@@ -138,6 +148,11 @@ export function HomeLayout(props: HomeLayoutProps) {
                         <ListItemText primary="Usuarios" />
                     </ListItem>
                 </List>
+
+                <DrawerEnd>
+                    <Divider />
+                    <img src={LogoUbademy} className="logo-ubademy" alt="logoUbademy"></img>
+                </DrawerEnd>
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />

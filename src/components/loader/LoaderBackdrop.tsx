@@ -1,5 +1,5 @@
-import { makeStyles } from '@material-ui/styles';
-import { createStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';

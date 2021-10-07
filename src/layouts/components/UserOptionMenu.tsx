@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useState } from 'react';
 import clsx from 'clsx'; // para el manejo de className medio dinamico
 
-import { makeStyles } from '@material-ui/styles';
-import { createStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import Box from '@mui/material/Box';
 
 import AccountCircle from '@mui/icons-material/AccountCircle';

@@ -10,7 +10,7 @@ function App() {
         <Router>
             <Switch>
                 <Route exact strict path="/login" render={(props) => <LogIn/>}/>
-
+                <PrivateRoute path='*' renderComponent={(props) => <Home/>} />
                 <PrivateRoute exact strict path="/" renderComponent={(props) => <Home/>} />
             </Switch>
         </Router>
