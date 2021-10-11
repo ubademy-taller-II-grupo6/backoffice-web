@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 
 let axiosInstance: AxiosInstance;
 let timeuotMs : number = 20000;
@@ -9,11 +9,36 @@ axiosInstance = axios.create({
     timeout: timeuotMs
 });
 
-const responseBody = (response: AxiosResponse) => response.data;
+const responseBody = (response: AxiosResponse) => {
+    if (response.status >= 200 && response.status < 300) 
+        return {
+            data: response.data,
+            tieneError: false,
+            mensajeError: "" 
+        }  
+    
+    return {
+        data: null,
+        tieneError: true,
+        mensajeError: response.data.detail.error
+    }  
+} 
+
+const responseBodyError = (responseError: AxiosError) => {
+    let msgError : string = "Por favor, verifique los datos ingresados";
+
+    if (responseError.response?.data) msgError = responseError.response.data.detail.error;
+
+    return {
+        data: null,
+        tieneError: true,
+        mensajeError: msgError
+    }  
+} 
 
 export const HttpAxiosBase = {
 	get: (url: string) => axiosInstance.get(url).then(responseBody),
-	getWithQueryParams: (url: string, params : {}) => axiosInstance.get(url, { params: params}).then(responseBody),
+	getWithQueryParams: (url: string, params : {}) => axiosInstance.get(url, { params: params}).then(responseBody).catch(responseBodyError),
 	post: (url: string, body: {}) => axiosInstance.post(url, body).then(responseBody),
 	put: (url: string, body: {}) => axiosInstance.put(url, body).then(responseBody),
 	delete: (url: string) => axiosInstance.delete(url).then(responseBody),

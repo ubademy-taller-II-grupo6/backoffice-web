@@ -11,6 +11,8 @@ import { AccountLayoutAdmin } from 'layouts/AccountLayoutAdmin';
 import { HttpUser } from 'http/user/httpUser';
 import { userStorage } from 'userSession/userStorage';
 import { UserSession } from 'types/user/userType';
+import { ResponseBase } from 'types/reponses/responsesType';
+import { SnackBarAlertWarning } from 'components/forms/SnakBarAlert';
 
 enum LogInFormFields {
     Email = 'Email',
@@ -26,6 +28,7 @@ type LogInFormData = yup.InferType<typeof LogInFormSchema>;
 
 export function LogIn () {
     const [isLoading, setLoading] = useState<boolean>(false);
+    const [msgError, setMsgError] = useState<string>();
 
     const {
         control,
@@ -36,14 +39,21 @@ export function LogIn () {
 
     async function onLoginClick (data: LogInFormData)  {
         setLoading(true);
+        setMsgError(undefined);
 
-        let response : UserSession = await HttpUser.loginUser(data.Email, data.Contraseña);
+        let response : ResponseBase<UserSession> = await HttpUser.loginUser(data.Email, data.Contraseña);
 
-        userStorage.logInUser(response.nombre, response.apellido, response.email);
-
-        setLoading(false);
-
-        window.location.href = "/"; // Redirecciona a la pagina de inicio
+        if ((response.tieneError) || (response.data === null)) {
+            setLoading(false);
+            setMsgError(response.mensajeError);
+        } else {
+            let userDate : UserSession = response.data;
+            userStorage.logInUser(userDate.nombre, userDate.apellido, userDate.email);
+    
+            setLoading(false);
+    
+            window.location.href = "/"; // Redirecciona a la pagina de inicio
+        }
     }
 
     return (
@@ -75,6 +85,12 @@ export function LogIn () {
                 isLoading &&
                     <LoaderBackdrop />
             }
+
+            {
+                msgError &&
+                    <SnackBarAlertWarning message={msgError} />
+            }
+
         </AccountLayoutAdmin>
     ); 
 }
