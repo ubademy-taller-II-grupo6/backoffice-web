@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/backoffice-web/static/css/main.3c45d953.chunk.css",
+    "main.css": "/backoffice-web/static/css/main.e67c52b3.chunk.css",
     "main.js": "/backoffice-web/static/js/main.05dd5d59.chunk.js",
     "main.js.map": "/backoffice-web/static/js/main.05dd5d59.chunk.js.map",
     "runtime-main.js": "/backoffice-web/static/js/runtime-main.95b16893.js",
@@ -10,14 +10,14 @@
     "static/js/3.3d24a384.chunk.js": "/backoffice-web/static/js/3.3d24a384.chunk.js",
     "static/js/3.3d24a384.chunk.js.map": "/backoffice-web/static/js/3.3d24a384.chunk.js.map",
     "index.html": "/backoffice-web/index.html",
-    "static/css/main.3c45d953.chunk.css.map": "/backoffice-web/static/css/main.3c45d953.chunk.css.map",
+    "static/css/main.e67c52b3.chunk.css.map": "/backoffice-web/static/css/main.e67c52b3.chunk.css.map",
     "static/js/2.0e4d975d.chunk.js.LICENSE.txt": "/backoffice-web/static/js/2.0e4d975d.chunk.js.LICENSE.txt",
     "static/media/logoUbademy.081b0c3a.png": "/backoffice-web/static/media/logoUbademy.081b0c3a.png"
   },
   "entrypoints": [
     "static/js/runtime-main.95b16893.js",
     "static/js/2.0e4d975d.chunk.js",
-    "static/css/main.3c45d953.chunk.css",
+    "static/css/main.e67c52b3.chunk.css",
     "static/js/main.05dd5d59.chunk.js"
   ]
 }
