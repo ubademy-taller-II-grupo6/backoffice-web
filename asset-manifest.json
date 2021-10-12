@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/backoffice-web/static/css/main.1161575a.chunk.css",
-    "main.js": "/backoffice-web/static/js/main.e6302504.chunk.js",
-    "main.js.map": "/backoffice-web/static/js/main.e6302504.chunk.js.map",
-    "runtime-main.js": "/backoffice-web/static/js/runtime-main.48caa32c.js",
-    "runtime-main.js.map": "/backoffice-web/static/js/runtime-main.48caa32c.js.map",
-    "static/js/2.879dbee7.chunk.js": "/backoffice-web/static/js/2.879dbee7.chunk.js",
-    "static/js/2.879dbee7.chunk.js.map": "/backoffice-web/static/js/2.879dbee7.chunk.js.map",
-    "static/js/3.aa212f04.chunk.js": "/backoffice-web/static/js/3.aa212f04.chunk.js",
-    "static/js/3.aa212f04.chunk.js.map": "/backoffice-web/static/js/3.aa212f04.chunk.js.map",
+    "main.css": "/backoffice-web/static/css/main.3c45d953.chunk.css",
+    "main.js": "/backoffice-web/static/js/main.05dd5d59.chunk.js",
+    "main.js.map": "/backoffice-web/static/js/main.05dd5d59.chunk.js.map",
+    "runtime-main.js": "/backoffice-web/static/js/runtime-main.95b16893.js",
+    "runtime-main.js.map": "/backoffice-web/static/js/runtime-main.95b16893.js.map",
+    "static/js/2.0e4d975d.chunk.js": "/backoffice-web/static/js/2.0e4d975d.chunk.js",
+    "static/js/2.0e4d975d.chunk.js.map": "/backoffice-web/static/js/2.0e4d975d.chunk.js.map",
+    "static/js/3.3d24a384.chunk.js": "/backoffice-web/static/js/3.3d24a384.chunk.js",
+    "static/js/3.3d24a384.chunk.js.map": "/backoffice-web/static/js/3.3d24a384.chunk.js.map",
     "index.html": "/backoffice-web/index.html",
-    "static/css/main.1161575a.chunk.css.map": "/backoffice-web/static/css/main.1161575a.chunk.css.map",
-    "static/js/2.879dbee7.chunk.js.LICENSE.txt": "/backoffice-web/static/js/2.879dbee7.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/backoffice-web/static/media/logo.6ce24c58.svg"
+    "static/css/main.3c45d953.chunk.css.map": "/backoffice-web/static/css/main.3c45d953.chunk.css.map",
+    "static/js/2.0e4d975d.chunk.js.LICENSE.txt": "/backoffice-web/static/js/2.0e4d975d.chunk.js.LICENSE.txt",
+    "static/media/logoUbademy.081b0c3a.png": "/backoffice-web/static/media/logoUbademy.081b0c3a.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.48caa32c.js",
-    "static/js/2.879dbee7.chunk.js",
-    "static/css/main.1161575a.chunk.css",
-    "static/js/main.e6302504.chunk.js"
+    "static/js/runtime-main.95b16893.js",
+    "static/js/2.0e4d975d.chunk.js",
+    "static/css/main.3c45d953.chunk.css",
+    "static/js/main.05dd5d59.chunk.js"
   ]
 }
