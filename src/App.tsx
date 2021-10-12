@@ -1,26 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
+import { LogIn } from 'pages/admin/LogIn';
+import { PrivateRoute } from 'components/routes/PrivateRoute';
+import { Home } from 'pages/home/Home';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Estructura de repositorio para el Backoffice-Web
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          UBADEMY
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Router>
+            <Switch>
+                <Route exact strict path="/login" render={(props) => <LogIn/>}/>
+                <PrivateRoute path='*' renderComponent={(props) => <Home/>} />
+                <PrivateRoute exact strict path="/" renderComponent={(props) => <Home/>} />
+            </Switch>
+        </Router>
+    );
 }
 
 export default App;
