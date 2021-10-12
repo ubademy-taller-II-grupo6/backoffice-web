@@ -52,7 +52,7 @@ export function LogIn () {
     
             setLoading(false);
     
-            window.location.href = "/"; // Redirecciona a la pagina de inicio
+            window.location.href = "/backoffice-web/"; // Redirecciona a la pagina de inicio
         }
     }
 

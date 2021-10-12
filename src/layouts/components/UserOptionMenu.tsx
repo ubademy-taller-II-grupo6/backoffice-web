@@ -58,7 +58,7 @@ export function UserOptionMenu () {
 
     const handleLogOut = () => {
         userStorage.logOutUser();
-        window.location.href = "/login";
+        window.location.href = "/backoffice-web/login";
     };
 
     const menuId = 'menu-user-option';
