@@ -30,7 +30,7 @@ function SnackBarAlert (props: SnackBarAlertComponentProps) {
   
     return (
       <div>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
           <Alert onClose={handleClose} severity={props.severity} >
             {props.message}
           </Alert>
