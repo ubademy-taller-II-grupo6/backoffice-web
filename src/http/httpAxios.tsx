@@ -37,9 +37,9 @@ const responseBodyError = (responseError: AxiosError) => {
 } 
 
 export const HttpAxiosBase = {
-	get: (url: string) => axiosInstance.get(url).then(responseBody),
+	get: (url: string) => axiosInstance.get(url).then(responseBody).catch(responseBodyError),
 	getWithQueryParams: (url: string, params : {}) => axiosInstance.get(url, { params: params}).then(responseBody).catch(responseBodyError),
-	post: (url: string, body: {}) => axiosInstance.post(url, body).then(responseBody),
-	put: (url: string, body: {}) => axiosInstance.put(url, body).then(responseBody),
-	delete: (url: string) => axiosInstance.delete(url).then(responseBody),
+	post: (url: string, body: {}) => axiosInstance.post(url, body).then(responseBody).catch(responseBodyError),
+	put: (url: string, body: {}) => axiosInstance.put(url, body).then(responseBody).catch(responseBodyError),
+	delete: (url: string) => axiosInstance.delete(url).then(responseBody).catch(responseBodyError),
 };
