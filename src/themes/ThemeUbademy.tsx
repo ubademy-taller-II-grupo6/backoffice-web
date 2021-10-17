@@ -20,6 +20,27 @@ const theme = createTheme ({
                 },
             },
         },
+
+        MuiCardHeader: {
+            styleOverrides: {
+                root:{
+                  padding: "12px 14px 12px 14px",
+                  borderBottom: "2px solid #82C1E7",
+                },
+                title:{
+                  fontWeight: 600,
+                  fontSize: "1.142857rem",
+                },
+            }
+        },
+
+        MuiDivider: {
+            styleOverrides: {
+                root: {
+                    borderColor: "#82C1E7"
+                }
+            }
+        }
     },    
 });
 

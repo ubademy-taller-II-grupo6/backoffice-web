@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -11,15 +13,16 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { UserOptionMenu } from './components/UserOptionMenu';
 import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
 import LogoUbademy from 'assets/images/logoUbademy.png';
-
+import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
+import { Container } from '@mui/material';
 const drawerWidthOpen = 220;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{open?: boolean;}>
@@ -95,69 +98,77 @@ export function HomeLayout(props: HomeLayoutProps) {
     };
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <AppBar position="fixed" open={open}>
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        sx={{ mr: 2, ...(open && { display: 'none' }) }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-                        Ubademy
-                    </Typography>
+        <Container maxWidth="xl">
+            <Box sx={{ display: 'flex' }}>
+                <CssBaseline />
+                <AppBar position="fixed" open={open}>
+                    <Toolbar>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="start"
+                            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+                            Ubademy
+                        </Typography>
 
-                    <UserOptionMenu />
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                sx={{
-                    whiteSpace: "nowrap",
-                    width: drawerWidthOpen,
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
-                        color: "#a2a3b7",
-                        backgroundColor: "#1e1e2d",
+                        <UserOptionMenu />
+                    </Toolbar>
+                </AppBar>
+                <Drawer
+                    sx={{
+                        whiteSpace: "nowrap",
                         width: drawerWidthOpen,
-                        boxSizing: 'border-box',
-                    },
-                    '& > .MuiPaper-root .MuiListItemIcon-root': {
-                        color: "#a2a3b7",
-                    },
-                }}
-                variant="persistent"
-                anchor="left"
-                open={open}
-            >
-                <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose} style={{color: "#a2a3b7"}}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </DrawerHeader>
-                <Divider />
-                <List>
-                    <ListItem>
-                        <ListItemIcon>
-                            <SupervisorAccountRoundedIcon fontSize="medium" />
-                        </ListItemIcon>
-                        <ListItemText primary="Usuarios" />
-                    </ListItem>
-                </List>
-
-                <DrawerEnd>
+                        flexShrink: 0,
+                        '& .MuiDrawer-paper': {
+                            color: "#a2a3b7",
+                            backgroundColor: "#1e1e2d",
+                            width: drawerWidthOpen,
+                            boxSizing: 'border-box',
+                        },
+                        '& > .MuiPaper-root .MuiListItemIcon-root': {
+                            color: "#a2a3b7",
+                        },
+                    }}
+                    variant="persistent"
+                    anchor="left"
+                    open={open}
+                >
+                    <DrawerHeader>
+                        <IconButton onClick={handleDrawerClose} style={{color: "#a2a3b7"}}>
+                            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        </IconButton>
+                    </DrawerHeader>
                     <Divider />
-                    <img src={LogoUbademy} className="logo-ubademy" alt="logoUbademy"></img>
-                </DrawerEnd>
-            </Drawer>
-            <Main open={open}>
-                <DrawerHeader />
-                { props.children }
-            </Main>
-        </Box>
+                    <List>
+                        <MenuItem component={Link} to="/">
+                            <ListItemIcon>
+                                <DashboardRoundedIcon fontSize="medium" />
+                            </ListItemIcon>
+                            <ListItemText primary="Dashboard" />
+                        </MenuItem>
+                        <MenuItem component={Link} to="/">
+                            <ListItemIcon>
+                                <SupervisorAccountRoundedIcon fontSize="medium" />
+                            </ListItemIcon>
+                            <ListItemText primary="Usuarios" />
+                        </MenuItem>
+                    </List>
+
+                    <DrawerEnd>
+                        <Divider />
+                        <img src={LogoUbademy} className="logo-ubademy" alt="logoUbademy"></img>
+                    </DrawerEnd>
+                </Drawer>
+                <Main open={open}>
+                    <DrawerHeader />
+                    { props.children }
+                </Main>
+            </Box>
+        </Container>
     );
 }

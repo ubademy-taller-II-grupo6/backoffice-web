@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx'; // para el manejo de className medio dinamico
 
 import { makeStyles, createStyles } from '@material-ui/styles';
@@ -56,11 +57,8 @@ export function UserOptionMenu () {
     
     const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => setMobileMoreAnchorEl(event.currentTarget);
 
-    const handleLogOut = () => {
-        userStorage.logOutUser();
-        window.location.href = "/backoffice-web/login";
-    };
-
+    const handleLogOut = () => userStorage.logOutUser();
+    
     const menuId = 'menu-user-option';
     const renderMenu = (
         <Menu anchorEl={anchorEl}
@@ -97,13 +95,17 @@ export function UserOptionMenu () {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-            <MenuItem onClick={handleMenuClose}>
+            <MenuItem component={Link} 
+                      to="/myProfile"
+                      onClick={handleMenuClose}>
                 <ListItemIcon>
                     <PermContactCalendarRoundedIcon fontSize="small" />
                 </ListItemIcon>
                 <ListItemText primary="Mi perfil" />
             </MenuItem>
-            <MenuItem onClick={handleLogOut}>
+            <MenuItem component={Link} 
+                      to="/"
+                      onClick={handleLogOut}>
                 <ListItemIcon>
                     <LogoutRoundedIcon fontSize="small" />
                 </ListItemIcon>
@@ -152,13 +154,17 @@ export function UserOptionMenu () {
                 { userStorage.getFullName() }                        
             </Typography>
             <Divider />
-            <MenuItem onClick={handleProfileMenuOpen}>
+            <MenuItem component={Link} 
+                      to="/myProfile"
+                      onClick={handleMenuClose}>
                 <ListItemIcon>
                     <PermContactCalendarRoundedIcon fontSize="small" />
                 </ListItemIcon>
                 <ListItemText primary="Mi perfil" />
             </MenuItem>
-            <MenuItem onClick={handleLogOut}>
+            <MenuItem component={Link} 
+                      to="/"
+                      onClick={handleLogOut}>
                 <ListItemIcon>
                     <LogoutRoundedIcon fontSize="small" />
                 </ListItemIcon>
