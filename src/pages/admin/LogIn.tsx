@@ -12,7 +12,7 @@ import { HttpUser } from 'http/user/httpUser';
 import { userStorage } from 'userSession/userStorage';
 import { UserSession } from 'types/user/userType';
 import { ResponseBase } from 'types/reponses/responsesType';
-import { SnackBarAlertWarning } from 'components/forms/SnakBarAlert';
+import { SnackBarAlertWarning } from 'components/forms/SnackBarAlert';
 
 enum LogInFormFields {
     Email = 'Email',

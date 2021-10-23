@@ -1,5 +1,5 @@
 import { HttpAxiosBase } from "../httpAxios";
-import { UserSession } from "types/user/userType";
+import { Administrator, UserSession } from "types/user/userType";
 import { ResponseBase } from "types/reponses/responsesType";
 
 export const HttpUser = {
@@ -9,6 +9,15 @@ export const HttpUser = {
             {
                 email: email,
                 contraseña: password
+            }
+        );
+    },
+
+    getAdminByEmail: (email: string) : Promise<ResponseBase<Administrator>> => {
+        return HttpAxiosBase.getWithQueryParams(
+            "user/",
+            {
+                email: email
             }
         );
     }
