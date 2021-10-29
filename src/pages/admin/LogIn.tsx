@@ -49,7 +49,7 @@ export function LogIn () {
             setMsgError(response.mensajeError);
         } else {
             let dataAdministrator : Administrator = response.data;
-            userStorage.logInUser(dataAdministrator.name, dataAdministrator.surname, dataAdministrator.email);
+            userStorage.logInUser(dataAdministrator.name, dataAdministrator.surname, dataAdministrator.email, adminToken);
     
             setLoading(false);
     
