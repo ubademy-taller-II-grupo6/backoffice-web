@@ -5,7 +5,9 @@ export interface UserSession {
 }
 
 export interface Administrator {
-    nombre: string,
-    apellido: string,
-    email: string
+    id: number,
+    name: string,
+    surname: string,
+    email: string,
+    isblocked: boolean
 }

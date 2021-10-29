@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 
 let axiosInstance: AxiosInstance;
 let timeuotMs : number = 20000;
-let urlServer : string = "https://calm-shore-44525.herokuapp.com/";
+let urlServer : string = "https://ubademy-admins.herokuapp.com/";
 
 axiosInstance = axios.create({
     baseURL: urlServer,

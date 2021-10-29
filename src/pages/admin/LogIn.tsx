@@ -2,17 +2,21 @@ import { useState } from 'react';
 import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import { getAuth, signInWithEmailAndPassword, UserCredential } from "firebase/auth";
 
 import { Button, Grid } from '@material-ui/core';
 import { ControlledTextField } from 'components/forms/ControlledTextField';
 import { LoaderBackdrop } from 'components/loader/LoaderBackdrop';
 
 import { AccountLayoutAdmin } from 'layouts/AccountLayoutAdmin';
-import { HttpUser } from 'http/user/httpUser';
+import { HttpAdmin } from 'http/user/httpAdmin';
 import { userStorage } from 'userSession/userStorage';
-import { UserSession } from 'types/user/userType';
+import { Administrator } from 'types/user/userType';
 import { ResponseBase } from 'types/reponses/responsesType';
 import { SnackBarAlertWarning } from 'components/forms/SnackBarAlert';
+import { firebaseUtils } from 'utils/firebaseUtils';
 
 enum LogInFormFields {
     Email = 'Email',
@@ -37,22 +41,37 @@ export function LogIn () {
         resolver: yupResolver(LogInFormSchema),
     });
 
-    async function onLoginClick (data: LogInFormData)  {
-        setLoading(true);
-        setMsgError(undefined);
-
-        let response : ResponseBase<UserSession> = await HttpUser.loginUser(data.Email, data.Contraseña);
+    async function getAdmin (adminEmail : string, adminToken : string) {
+        let response : ResponseBase<Administrator> = await HttpAdmin.getAdminByEmail(adminEmail);
 
         if ((response.tieneError) || (response.data === null)) {
             setLoading(false);
             setMsgError(response.mensajeError);
         } else {
-            let userDate : UserSession = response.data;
-            userStorage.logInUser(userDate.nombre, userDate.apellido, userDate.email);
+            let dataAdministrator : Administrator = response.data;
+            userStorage.logInUser(dataAdministrator.name, dataAdministrator.surname, dataAdministrator.email);
     
             setLoading(false);
     
             window.location.href = "/backoffice-web/"; // Redirecciona a la pagina de inicio
+        } 
+    }
+
+    async function onLoginClick (data: LogInFormData)  {
+        setLoading(true);
+        setMsgError(undefined);
+        
+        try {
+            const auth = getAuth(); 
+            let userCredential : UserCredential = await signInWithEmailAndPassword(auth, data.Email, data.Contraseña);
+            let userToken : string = await userCredential.user.getIdToken();
+            console.log("TOKEN " + userToken);
+
+            await getAdmin(data.Email, userToken);
+        } catch (error : any) {
+            var errorMessage = firebaseUtils.decodeMessageError(error.code);
+            setMsgError(errorMessage);
+            setLoading(false);
         }
     }
 

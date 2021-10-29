@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeUbademy } from 'themes/ThemeUbademy';
+import './config/firebase-config';
 
 ReactDOM.render(
     <div>
