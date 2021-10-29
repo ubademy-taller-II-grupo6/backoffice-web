@@ -14,14 +14,14 @@ import { SnackBarAlertWarning } from 'components/forms/SnackBarAlert';
 
 import { userStorage } from "userSession/userStorage";
 
-import { HttpUser } from 'http/user/httpUser';
+import { HttpAdmin } from 'http/user/httpAdmin';
 
 import { Administrator } from 'types/user/userType';
 import { ResponseBase } from 'types/reponses/responsesType';
 
 enum AdministratorFields {
-    Nombre = 'nombre',
-    Apellido = 'apellido',
+    Nombre = 'name',
+    Apellido = 'surname',
     Email = 'email'
 }
 
@@ -37,14 +37,14 @@ export function MyProfile () {
 
     useEffect(() => {
         reset({
-            nombre: adminProfile?.nombre,
-            apellido: adminProfile?.apellido,
+            name: adminProfile?.name,
+            surname: adminProfile?.surname,
             email: adminProfile?.email
         });
     }, [reset, adminProfile]);
 
     useEffect(() => {
-        HttpUser.getAdminByEmail(userStorage.getUserMail())
+        HttpAdmin.getAdminByEmail(userStorage.getUserMail())
             .then((response : ResponseBase<Administrator>) => {
                 if (response.tieneError || response.data === null)
                     setMsgError(response.mensajeError)

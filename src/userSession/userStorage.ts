@@ -1,42 +1,45 @@
 interface UserDataSession {
-    nombre: string,
-    apellido: string,
+    name: string,
+    surname: string,
     email: string
 };
 
 class UserStorage {
-    keyStorage: string = "userSessionUbademy";
+    keyAdminStorage: string = "adminSessionUbademy";
+    keyTokenStorage: string = "tokenSessionUbademy";
 
-    public logInUser(nombre: string, apellido: string, email: string) : void {
+    public logInUser(name: string, surname: string, email: string, token: string) : void {
         
         let userSession: UserDataSession = 
         {
-            nombre: nombre,
-            apellido: apellido,
+            name: name,
+            surname: surname,
             email: email
         }
 
-        localStorage.setItem(this.keyStorage, JSON.stringify(userSession));
+        localStorage.setItem(this.keyAdminStorage, JSON.stringify(userSession));
+        localStorage.setItem(this.keyTokenStorage, token);
     }
 
     public get(): UserDataSession {
         return JSON.parse(
-            localStorage.getItem(this.keyStorage) as string
+            localStorage.getItem(this.keyAdminStorage) as string
         ) as UserDataSession
     }
     
     public logOutUser() {
-        localStorage.removeItem(this.keyStorage);
+        localStorage.removeItem(this.keyAdminStorage);
+        localStorage.removeItem(this.keyTokenStorage);
     }
 
-    public isLogged() : boolean { return !!localStorage.getItem(this.keyStorage); }
+    public isLogged() : boolean { return !!localStorage.getItem(this.keyAdminStorage); }
 
     public getUserMail() { return this.get().email; }
 
     public getFullName() { 
         let userSession : UserDataSession = this.get();
 
-        return `${userSession.nombre} ${userSession.apellido}`;
+        return `${userSession.name} ${userSession.surname}`;
     }
 }
  
