@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route, Redirect, RouteProps } from 'react-router-dom';
+import { RouteProps } from 'react-router';
+import { Route, Redirect } from 'react-router-dom';
 import { userStorage } from 'userSession/userStorage';
 
 interface IPrivateRouteProps extends RouteProps{
@@ -14,7 +15,7 @@ export const PrivateRoute: React.FC<IPrivateRouteProps> = ({ path, renderCompone
         <Route
             {...rest}
             path={path}
-            render={(props) =>
+            render={(props: any) =>
                 userStorage.isLogged() ?
                     renderComponent(props)
                 :

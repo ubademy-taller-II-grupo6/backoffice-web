@@ -11,7 +11,7 @@ function App() {
     return (
         <Router basename="/backoffice-web">
             <Switch>
-                <Route exact strict path="/login" render={(props) => <LogIn/>}/>
+                <Route exact strict path="/login" render={(props: any) => <LogIn/>}/>
 
                 <PrivateRoute
                     path="/"
