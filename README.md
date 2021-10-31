@@ -5,7 +5,8 @@ El presente repositorio está destinado al backoffice-web (administrador) de la 
 ## Índice
 -------------------------------
 - [Ejecución Local](#ejecucion-local)
-- [Aplicación en la nube](#ejecucion-deploy)
+- [Aplicación en Heroku](#ejecucion-heroku)
+- [Aplicación en Github Pages](#ejecucion-ghpages)
 
 ## Ejecución Local: <a name="ejecucion-local"></a>
 -------------------------------
@@ -24,8 +25,14 @@ npm install
 npm start
 ~~~
 
-## Aplicación en la nube: <a name="ejecucion-deploy"></a>
+## Aplicación en Heroku: <a name="ejecucion-heroku"></a>
 -------------------------------
-Para poder utilizar la aplicación en la nube se lo puede hacer accediendo al siguiente link:
+Para poder utilizar la aplicación en Heroku se lo puede hacer accediendo al siguiente link:
+
+https://ubademy-backoffice-web.herokuapp.com/backoffice-web
+
+## Aplicación en Github Pages: <a name="ejecucion-ghpages"></a>
+-------------------------------
+Para poder utilizar la aplicación en Github Pages se lo puede hacer accediendo al siguiente link:
 
 https://ubademy-taller-ii-grupo6.github.io/backoffice-web
