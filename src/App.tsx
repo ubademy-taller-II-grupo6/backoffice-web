@@ -6,6 +6,7 @@ import { PrivateRoute } from 'components/routes/PrivateRoute';
 import { Home } from 'pages/home/Home';
 import { MyProfile } from 'pages/profile/MyProfile';
 import { HomeLayout } from 'layouts/HomeLayout';
+import { AdminList } from 'pages/admin/AdminList';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                         (props) => 
                         <HomeLayout>
                             <Switch>
+                                <PrivateRoute path="/admins" renderComponent={(props) => <AdminList />} />
                                 <PrivateRoute path="/myProfile" renderComponent={(props) => <MyProfile />} />
                                 <PrivateRoute path="/" renderComponent={(props) => <Home/>} />
                             </Switch>

@@ -157,6 +157,12 @@ export function HomeLayout(props: HomeLayoutProps) {
                             </ListItemIcon>
                             <ListItemText primary="Usuarios" />
                         </MenuItem>
+                        <MenuItem component={Link} to="/admins">
+                            <ListItemIcon>
+                                <SupervisorAccountRoundedIcon fontSize="medium" />
+                            </ListItemIcon>
+                            <ListItemText primary="Administradores" />
+                        </MenuItem>
                     </List>
 
                     <DrawerEnd>
