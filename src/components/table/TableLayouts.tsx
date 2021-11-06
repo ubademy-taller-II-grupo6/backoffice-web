@@ -27,7 +27,8 @@ const useStyles : any = makeStyles((theme: Theme) => createStyles({
 export interface TableColDef {
     field: string,
     headerName: string, 
-    width?: number
+    width?: number,
+    renderSpecial?: (interfaceData: any) => React.ReactElement
 }
 
 interface TableRowLoadingProps {

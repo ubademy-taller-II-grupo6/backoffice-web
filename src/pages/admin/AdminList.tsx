@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import { CardHeader, Grid, IconButton, Typography } from '@mui/material';
+import { CardHeader, Chip, Grid, IconButton, Typography } from '@mui/material';
+import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import SyncRoundedIcon from '@mui/icons-material/SyncRounded';
 
-import { TableList, TableColDef } from 'components/table/Table';
+import { TableList } from 'components/table/Table';
+import { TableColDef } from 'components/table/TableLayouts';
 
 import { Administrator } from 'types/user/userType';
 import { ResponseBase } from 'types/reponses/responsesType';
@@ -19,7 +22,19 @@ export function AdminList () {
         { field: 'name', headerName: 'Nombre' },
         { field: 'surname', headerName: 'Apellido' },
         { field: 'email', headerName: 'Mail' },
-        { field: 'isblocked', headerName: 'Estado' }
+        { 
+            field: 'isblocked', headerName: 'Estado',
+            renderSpecial: (oneAdministrator: Administrator) => (
+                <div>
+                    {
+                        oneAdministrator.isblocked ?
+                            <Chip label="Bloqueado" size="small" color="secondary" icon={<CloseRoundedIcon />} />
+                        :
+                            <Chip label="Activo" size="small" color="primary" icon={<CheckRoundedIcon />} />                          
+                    }
+                </div>
+            )
+        }
     ]
 
     const searchAdmins = () : Promise<ResponseBase<Administrator[]>> => {

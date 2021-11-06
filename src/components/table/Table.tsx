@@ -6,13 +6,7 @@ import {
     TableRow,
     Paper
 } from '@mui/material';
-import { TableHeader, TableRowBodyEmpty, TableRowLoading } from './TableLayouts';
-
-export interface TableColDef {
-    field: string,
-    headerName: string, 
-    width?: number
-}
+import { TableColDef, TableHeader, TableRowBodyEmpty, TableRowLoading } from './TableLayouts';
 
 interface TableListProps<T> {
     dataList: T[] | null | undefined,
@@ -36,6 +30,9 @@ export function TableList<T> (props: TableListProps<T>) {
                                     <TableRow key={`tableRow_${index}`}>
                                         {
                                             props.columnsDef.map((oneColumnDef : TableColDef) => (
+                                                oneColumnDef.renderSpecial ?
+                                                <TableCell key={`rowTableCell_${oneColumnDef.field}_${index}`}>{oneColumnDef.renderSpecial(data)}</TableCell>
+                                                :
                                                 <TableCell key={`rowTableCell_${oneColumnDef.field}_${index}`}>{data[oneColumnDef.field]}</TableCell>
                                             ))
                                         }

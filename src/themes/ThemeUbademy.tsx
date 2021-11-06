@@ -80,6 +80,19 @@ const theme = createTheme ({
                       }  
                 }
             }
+        },
+
+        MuiChip: {
+            styleOverrides: {
+                colorPrimary: {
+                    backgroundColor: '#BDFFC0',
+                    color: '#25650F'
+                },
+                colorSecondary: {
+                    backgroundColor: '#FAB3B3',
+                    color: '#610E0E'
+                }
+            }
         }
     },    
 });
