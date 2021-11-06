@@ -1,4 +1,5 @@
 import {
+    LinearProgress,
     Table,
     TableBody,
     TableCell,
@@ -16,7 +17,8 @@ export interface TableColDef {
 
 interface TableListProps<T> {
     dataList: T[] | null | undefined,
-    columnsDef: TableColDef[]
+    columnsDef: TableColDef[],
+    loading: boolean
 }
 
 export function TableList<T> (props: TableListProps<T>) {
@@ -27,7 +29,7 @@ export function TableList<T> (props: TableListProps<T>) {
                     <TableRow>
                         {
                             props.columnsDef.map((oneColumnDef: TableColDef, index: number) => (
-                                <TableCell key={`headerTableCell_${oneColumnDef.field}_${index}`}>{oneColumnDef.headerName}</TableCell>
+                                <TableCell key={`headerTableCell_${oneColumnDef.field}_${index}`} variant="head">{oneColumnDef.headerName}</TableCell>
                             ))
                         }
                     </TableRow>
@@ -35,7 +37,15 @@ export function TableList<T> (props: TableListProps<T>) {
                 
                 <TableBody>
                     {
-                        !!props.dataList &&
+                        props.loading &&
+                            <TableRow>
+                                <TableCell colSpan={props.columnsDef.length}>
+                                        <LinearProgress />
+                                </TableCell>
+                            </TableRow>
+                    }
+                    {
+                        !props.loading && !!props.dataList &&
                             props.dataList.map((data: any, index: number) => (
                                 <TableRow key={`tableRow_${index}`}>
                                     {

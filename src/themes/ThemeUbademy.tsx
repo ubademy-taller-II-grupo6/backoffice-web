@@ -24,12 +24,13 @@ const theme = createTheme ({
         MuiCardHeader: {
             styleOverrides: {
                 root:{
-                  padding: "12px 14px 12px 14px",
-                  borderBottom: "2px solid #82C1E7",
+                  padding: "7px 12px 1px 6px",
+                  borderBottom: "1.5px solid #82C1E7",
                 },
                 title:{
                   fontWeight: 600,
                   fontSize: "1.142857rem",
+                  color: "#4a4a61"
                 },
             }
         },

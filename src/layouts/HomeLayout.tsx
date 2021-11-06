@@ -3,26 +3,35 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
+
+import {
+    Box,
+    Container,
+    CssBaseline,
+    Divider,
+    Drawer,
+    IconButton,
+    List,
+    ListItemIcon,
+    ListItemText,
+    MenuItem,
+    Toolbar,
+    Typography
+} from '@mui/material';
+
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+
+import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSettingsRounded';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import { UserOptionMenu } from './components/UserOptionMenu';
-import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
-import LogoUbademy from 'assets/images/logoUbademy.png';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
-import { Container } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
+
+import LogoUbademy from 'assets/images/logoUbademy.png';
+
+import { UserOptionMenu } from './components/UserOptionMenu';
+
 const drawerWidthOpen = 220;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{open?: boolean;}>
@@ -159,7 +168,7 @@ export function HomeLayout(props: HomeLayoutProps) {
                         </MenuItem>
                         <MenuItem component={Link} to="/admins">
                             <ListItemIcon>
-                                <SupervisorAccountRoundedIcon fontSize="medium" />
+                                <AdminPanelSettingsRoundedIcon fontSize="medium" />
                             </ListItemIcon>
                             <ListItemText primary="Administradores" />
                         </MenuItem>
