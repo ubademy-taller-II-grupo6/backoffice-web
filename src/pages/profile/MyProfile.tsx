@@ -14,7 +14,7 @@ import { SnackBarAlertWarning } from 'components/forms/SnackBarAlert';
 
 import { userStorage } from "userSession/userStorage";
 
-import { HttpAdmin } from 'http/user/httpAdmin';
+import { HttpAdmin } from 'http/admin/httpAdmin';
 
 import { Administrator } from 'types/user/userType';
 import { ResponseBase } from 'types/reponses/responsesType';

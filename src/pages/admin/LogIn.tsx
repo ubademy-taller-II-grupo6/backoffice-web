@@ -11,7 +11,7 @@ import { ControlledTextField } from 'components/forms/ControlledTextField';
 import { LoaderBackdrop } from 'components/loader/LoaderBackdrop';
 
 import { AccountLayoutAdmin } from 'layouts/AccountLayoutAdmin';
-import { HttpAdmin } from 'http/user/httpAdmin';
+import { HttpAdmin } from 'http/admin/httpAdmin';
 import { userStorage } from 'userSession/userStorage';
 import { Administrator } from 'types/user/userType';
 import { ResponseBase } from 'types/reponses/responsesType';
@@ -65,7 +65,6 @@ export function LogIn () {
             const auth = getAuth(); 
             let userCredential : UserCredential = await signInWithEmailAndPassword(auth, data.Email, data.Contraseña);
             let userToken : string = await userCredential.user.getIdToken();
-            console.log("TOKEN " + userToken);
 
             await getAdmin(data.Email, userToken);
         } catch (error : any) {
