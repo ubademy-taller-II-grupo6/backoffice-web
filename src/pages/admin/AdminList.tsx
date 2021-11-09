@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { CardHeader, Chip, Grid, IconButton, Typography } from '@mui/material';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import SyncRoundedIcon from '@mui/icons-material/SyncRounded';
@@ -13,9 +14,12 @@ import { ResponseBase } from 'types/reponses/responsesType';
 
 import { HttpAdmin } from 'http/admin/httpAdmin';
 
+import { AdminDialog } from './AdminDialog';
+
 export function AdminList () {
 
     const [isLoading, setLoading] = useState<boolean>(true);
+    const [showAdminDialog, setShowAdminDialog] = useState<boolean>(false);
     const [listAdministrator, setListAdministrator] = useState<Administrator[]>();
 
     const adminListColDef : TableColDef[] = [
@@ -63,9 +67,14 @@ export function AdminList () {
                 <Grid item xs={12} sx={{ marginBottom: "10px" }}>
                     <CardHeader title="Administradores"
                                 action={
-                                    <IconButton color="primary" sx={{ color: "#4a4a61"}} onClick={onReloadTable}>
-                                        <SyncRoundedIcon />
-                                    </IconButton>
+                                    <>
+                                        <IconButton color="primary" sx={{ color: "#4a4a61"}} onClick={() => setShowAdminDialog(true)}>
+                                            <AddRoundedIcon />
+                                        </IconButton>
+                                        <IconButton color="primary" sx={{ color: "#4a4a61"}} onClick={onReloadTable}>
+                                            <SyncRoundedIcon />
+                                        </IconButton>
+                                    </>
                                 } />
                 </Grid>         
             </Grid>      
@@ -73,7 +82,14 @@ export function AdminList () {
                 <Grid item xs={12}>
                     <TableList loading={isLoading} dataList={listAdministrator} columnsDef={adminListColDef} />
                 </Grid>           
-            </Grid>          
+            </Grid>         
+
+            {
+                showAdminDialog &&
+                    <AdminDialog onCloseDialog={() => setShowAdminDialog(false)} 
+                                 onConfirmDialog={onReloadTable} />
+            } 
+
         </Typography>
     );
 }

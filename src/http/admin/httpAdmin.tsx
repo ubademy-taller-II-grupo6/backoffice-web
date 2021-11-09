@@ -9,5 +9,9 @@ export const HttpAdmin = {
 
     getListAdmins: () : Promise<ResponseBase<Administrator[]>> => {
         return HttpAxiosBase.get(`admins`);
-    } 
+    },
+    
+    createNewAdmin: (newAdministrator: Administrator) : Promise<ResponseBase<Administrator>> => {
+        return HttpAxiosBase.post("admins/", newAdministrator);
+    }
 }

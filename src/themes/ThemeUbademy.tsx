@@ -21,6 +21,19 @@ const theme = createTheme ({
             },
         },
 
+        MuiButton: {
+            styleOverrides: {
+                outlinedSecondary: {
+                    color: "#D82F2F",
+                    borderColor: "#D82F2F",
+                    '&:hover': {
+                        borderColor: "#D82F2F",
+                        backgroundColor: "#FFDEDE"
+                    }
+                }
+            }
+        },
+        
         MuiCardHeader: {
             styleOverrides: {
                 root:{
@@ -32,6 +45,27 @@ const theme = createTheme ({
                   fontSize: "1.142857rem",
                   color: "#4a4a61"
                 },
+            }
+        },
+
+        MuiChip: {
+            styleOverrides: {
+                colorPrimary: {
+                    backgroundColor: '#BDFFC0',
+                    color: '#25650F'
+                },
+                colorSecondary: {
+                    backgroundColor: '#FAB3B3',
+                    color: '#610E0E'
+                }
+            }
+        },
+
+        MuiDialogTitle: {
+            styleOverrides: {
+                root: {
+                    borderBottom: "1.5px solid #82C1E7",
+                }
             }
         },
 
@@ -78,19 +112,6 @@ const theme = createTheme ({
                       '& tr:nth-of-type(odd)': {
                         backgroundColor: "#f2f8f9"
                       }  
-                }
-            }
-        },
-
-        MuiChip: {
-            styleOverrides: {
-                colorPrimary: {
-                    backgroundColor: '#BDFFC0',
-                    color: '#25650F'
-                },
-                colorSecondary: {
-                    backgroundColor: '#FAB3B3',
-                    color: '#610E0E'
                 }
             }
         }
