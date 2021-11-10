@@ -5,5 +5,13 @@ import { ResponseBase } from "types/reponses/responsesType";
 export const HttpAdmin = {
     getAdminByEmail: (email: string) : Promise<ResponseBase<Administrator>> => {
         return HttpAxiosBase.get(`admins/email/${email}`);
+    },
+
+    getListAdmins: () : Promise<ResponseBase<Administrator[]>> => {
+        return HttpAxiosBase.get(`admins`);
+    },
+    
+    createNewAdmin: (newAdministrator: Administrator) : Promise<ResponseBase<Administrator>> => {
+        return HttpAxiosBase.post("admins/", newAdministrator);
     }
 }
