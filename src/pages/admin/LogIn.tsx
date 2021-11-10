@@ -7,7 +7,7 @@ import 'firebase/compat/firestore';
 import { getAuth, signInWithEmailAndPassword, UserCredential } from "firebase/auth";
 
 import { Button, Grid } from '@material-ui/core';
-import { ControlledTextField } from 'components/forms/ControlledTextField';
+import { ControlledTextField, ControlledTextFieldPassword } from 'components/forms/ControlledTextField';
 import { LoaderBackdrop } from 'components/loader/LoaderBackdrop';
 
 import { AccountLayoutAdmin } from 'layouts/AccountLayoutAdmin';
@@ -77,17 +77,18 @@ export function LogIn () {
     return (
         <AccountLayoutAdmin>
             <form onSubmit={handleSubmit(onLoginClick)}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
+                <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
+                    <Grid item xs={9}>
                         <ControlledTextField label="Usuario"
                                             name={LogInFormFields.Email}
+                                            fullWidth
                                             control={control} />
                     </Grid>
-                    <Grid item xs={12}>
-                        <ControlledTextField label="Contraseña"
-                                            type='password'
-                                            name={LogInFormFields.Contraseña}
-                                            control={control} />
+                    <Grid item xs={9}>
+                        <ControlledTextFieldPassword label="Contraseña"
+                                                    name={LogInFormFields.Contraseña}
+                                                    fullWidth
+                                                    control={control} />
                     </Grid>
 
                     <Grid item xs={12}>
