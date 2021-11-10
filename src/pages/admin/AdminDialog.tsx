@@ -16,7 +16,7 @@ import {
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
 
-import { ControlledTextField } from 'components/forms/ControlledTextField';
+import { ControlledTextField, ControlledTextFieldPassword } from 'components/forms/ControlledTextField';
 import { SnackBarAlertSuccess, SnackBarAlertWarning } from 'components/forms/SnackBarAlert';
 import { LoaderBackdrop } from 'components/loader/LoaderBackdrop';
 
@@ -40,10 +40,11 @@ const AdminDialogFormSchema = yup.object().shape({
     [AdminDialogFormFields.Name]: yup.string().required('Campo obligatorio'),
     [AdminDialogFormFields.Surname]: yup.string().required('Campo obligatorio'),
     [AdminDialogFormFields.Email]: yup.string().email('El campo debe ser un mail válido').required('Campo obligatorio'),
-    [AdminDialogFormFields.PasswordRepeat]: yup.string().required('Campo obligatorio'),
-    [AdminDialogFormFields.Password]: yup.string().required('Campo obligatorio')
+    [AdminDialogFormFields.Password]: yup.string().required('Campo obligatorio').min(6, 'La contraseña debe tener 6 caracteres como mínimo'),
+    [AdminDialogFormFields.PasswordRepeat]: yup.string().required('Campo obligatorio')
+                                                .min(6, 'La contraseña debe tener 6 caracteres como mínimo')
+                                                .oneOf([yup.ref(AdminDialogFormFields.Password), null], 'Las constraseñas no coinciden')
 })
-// 'La contraseña debe tener 6 caracteres como mínimo.'
 
 type AdminDialogFormData = yup.InferType<typeof AdminDialogFormSchema>;
 
@@ -67,7 +68,7 @@ export function AdminDialog (props: AdminDialogProps) {
         control,
         handleSubmit
     } = useForm<AdminDialogFormData>({
-        resolver: yupResolver(AdminDialogFormSchema),
+        resolver: yupResolver(AdminDialogFormSchema, { abortEarly: false }),
     });
 
     const onHandleClose = () => {
@@ -104,7 +105,7 @@ export function AdminDialog (props: AdminDialogProps) {
                 let dataAdministrator : Administrator = response.data;
                 setMailSaveAdmin(dataAdministrator.email);
                 onHandleSubmit();
-            } 
+            }
 
             setSaving(false);
 
@@ -146,13 +147,13 @@ export function AdminDialog (props: AdminDialogProps) {
                             </Grid>
                             <Grid container spacing={3} item>
                                 <Grid item xs={6}>
-                                    <ControlledTextField label="Contraseña"
+                                    <ControlledTextFieldPassword label="Contraseña"
                                                         name={AdminDialogFormFields.Password}
                                                         fullWidth
                                                         control={control} />
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <ControlledTextField label="Repetir Contraseña"
+                                    <ControlledTextFieldPassword label="Repetir Contraseña"
                                                         name={AdminDialogFormFields.PasswordRepeat}
                                                         fullWidth
                                                         control={control} />
