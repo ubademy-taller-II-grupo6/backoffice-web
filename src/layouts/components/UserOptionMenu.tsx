@@ -1,26 +1,30 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import clsx from 'clsx'; // para el manejo de className medio dinamico
-
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core/styles';
-import Box from '@mui/material/Box';
+import clsx from 'clsx'; // para el manejo de className medio dinamico
+
+import { 
+    Box,
+    Divider,
+    ListItemIcon,
+    ListItemText,
+    Menu,
+    MenuItem,
+    Typography
+} from '@mui/material';
 
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import PermContactCalendarRoundedIcon from '@mui/icons-material/PermContactCalendarRounded';
-import Typography from '@mui/material/Typography';
 
+import { Administrator } from 'types/user/userType';
 import { userStorage } from 'userSession/userStorage';
+import { AdminDialog } from 'pages/admin/AdminDialog';
 
 const useStyles : any = makeStyles((theme: Theme) => createStyles({
     boxContentMd: {
@@ -42,10 +46,18 @@ export function UserOptionMenu () {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
+    const [showAdminDialog, setShowAdminDialog] = useState<boolean>(false);
   
+    const userLogged = userStorage.get();
+    const administratorLogged : Administrator = {
+        name: userLogged.name,
+        surname: userLogged.surname,
+        email: userLogged.email
+    } as Administrator;
+
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  
+    
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget);
 
     const handleMobileMenuClose = () => setMobileMoreAnchorEl(null);
@@ -59,6 +71,11 @@ export function UserOptionMenu () {
 
     const handleLogOut = () => userStorage.logOutUser();
     
+    const handleCloseDialogAdmin = () => {
+        (isMobileMenuOpen) ? handleMobileMenuClose() : handleMenuClose();
+        setShowAdminDialog(false);
+    };
+
     const menuId = 'menu-user-option';
     const renderMenu = (
         <Menu anchorEl={anchorEl}
@@ -95,9 +112,7 @@ export function UserOptionMenu () {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-            <MenuItem component={Link} 
-                      to="/myProfile"
-                      onClick={handleMenuClose}>
+            <MenuItem onClick={() => setShowAdminDialog(true)}>
                 <ListItemIcon>
                     <PermContactCalendarRoundedIcon fontSize="small" />
                 </ListItemIcon>
@@ -154,9 +169,7 @@ export function UserOptionMenu () {
                 { userStorage.getFullName() }                        
             </Typography>
             <Divider />
-            <MenuItem component={Link} 
-                      to="/myProfile"
-                      onClick={handleMenuClose}>
+            <MenuItem onClick={() => setShowAdminDialog(true)}>
                 <ListItemIcon>
                     <PermContactCalendarRoundedIcon fontSize="small" />
                 </ListItemIcon>
@@ -203,7 +216,14 @@ export function UserOptionMenu () {
                 </IconButton>
             </Box>
             { renderMobileMenu }
-            { renderMenu }            
+            { renderMenu } 
+
+            {
+                showAdminDialog &&
+                    <AdminDialog onCloseDialog={handleCloseDialogAdmin} 
+                                 onConfirmDialog={handleCloseDialogAdmin}
+                                 administrator={administratorLogged} />
+            }         
         </div>
     );
 }

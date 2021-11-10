@@ -36,18 +36,6 @@ enum AdminDialogFormFields {
     PasswordRepeat = 'passwordRepeat'
 }
 
-const AdminDialogFormSchema = yup.object().shape({
-    [AdminDialogFormFields.Name]: yup.string().required('Campo obligatorio'),
-    [AdminDialogFormFields.Surname]: yup.string().required('Campo obligatorio'),
-    [AdminDialogFormFields.Email]: yup.string().email('El campo debe ser un mail válido').required('Campo obligatorio'),
-    [AdminDialogFormFields.Password]: yup.string().required('Campo obligatorio').min(6, 'La contraseña debe tener 6 caracteres como mínimo'),
-    [AdminDialogFormFields.PasswordRepeat]: yup.string().required('Campo obligatorio')
-                                                .min(6, 'La contraseña debe tener 6 caracteres como mínimo')
-                                                .oneOf([yup.ref(AdminDialogFormFields.Password), null], 'Las constraseñas no coinciden')
-})
-
-type AdminDialogFormData = yup.InferType<typeof AdminDialogFormSchema>;
-
 interface AdminDialogProps {
     administrator?: Administrator,
     onCloseDialog: () => void,
@@ -64,10 +52,38 @@ export function AdminDialog (props: AdminDialogProps) {
     const isNewAdmin : boolean = !props.administrator;
     const titleDialog : string = isNewAdmin ? "Nuevo Administrador" : `${props.administrator?.name} ${props.administrator?.surname}`;
 
+    const AdminDialogFormSchema = 
+        isNewAdmin ? 
+            yup.object().shape({
+                [AdminDialogFormFields.Name]: yup.string().required('Campo obligatorio'),
+                [AdminDialogFormFields.Surname]: yup.string().required('Campo obligatorio'),
+                [AdminDialogFormFields.Email]: yup.string().email('El campo debe ser un mail válido').required('Campo obligatorio'),
+                [AdminDialogFormFields.Password]: yup.string().required('Campo obligatorio').min(6, 'La contraseña debe tener 6 caracteres como mínimo'),
+                [AdminDialogFormFields.PasswordRepeat]: yup.string().required('Campo obligatorio')
+                                                            .min(6, 'La contraseña debe tener 6 caracteres como mínimo')
+                                                            .oneOf([yup.ref(AdminDialogFormFields.Password), null], 'Las constraseñas no coinciden')
+            })    
+        :
+            yup.object().shape({
+                [AdminDialogFormFields.Name]: yup.string().required('Campo obligatorio'),
+                [AdminDialogFormFields.Surname]: yup.string().required('Campo obligatorio'),
+                [AdminDialogFormFields.Email]: yup.string().email('El campo debe ser un mail válido').required('Campo obligatorio'),
+                [AdminDialogFormFields.Password]: yup.string().required('Campo obligatorio').min(6, 'La contraseña debe tener 6 caracteres como mínimo')
+            })
+
+    
+    
+    type AdminDialogFormData = yup.InferType<typeof AdminDialogFormSchema>;
+
     const {
         control,
         handleSubmit
     } = useForm<AdminDialogFormData>({
+        defaultValues: {
+            name: props.administrator?.name || "",
+            surname: props.administrator?.surname || "",
+            email: props.administrator?.email || "",
+        } as AdminDialogFormData,
         resolver: yupResolver(AdminDialogFormSchema, { abortEarly: false }),
     });
 
@@ -126,39 +142,44 @@ export function AdminDialog (props: AdminDialogProps) {
                     <DialogContent>
                         <Grid container spacing={3}>
                             <Grid container spacing={3} item>
-                                <Grid item xs={6}>
+                                <Grid item xs={12} sm={12} md={6} lg={6} >
                                     <ControlledTextField label="Nombre"
                                                         name={AdminDialogFormFields.Name}
                                                         fullWidth
                                                         control={control} />
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={12} sm={12} md={6} lg={6}>
                                     <ControlledTextField label="Apellido"
                                                         name={AdminDialogFormFields.Surname}
                                                         fullWidth
                                                         control={control} />
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={12} sm={12} md={6} lg={6}>
                                     <ControlledTextField label="Mail"
                                                         name={AdminDialogFormFields.Email}
                                                         fullWidth
                                                         control={control} />
                                 </Grid>
                             </Grid>
-                            <Grid container spacing={3} item>
-                                <Grid item xs={6}>
-                                    <ControlledTextFieldPassword label="Contraseña"
-                                                        name={AdminDialogFormFields.Password}
-                                                        fullWidth
-                                                        control={control} />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <ControlledTextFieldPassword label="Repetir Contraseña"
-                                                        name={AdminDialogFormFields.PasswordRepeat}
-                                                        fullWidth
-                                                        control={control} />
-                                </Grid>
-                            </Grid>
+                            
+                            {
+                                isNewAdmin && 
+                                    <Grid container spacing={3} item>
+                                        <Grid item xs={12} sm={12} md={6} lg={6}>
+                                            <ControlledTextFieldPassword label="Contraseña"
+                                                                name={AdminDialogFormFields.Password}
+                                                                fullWidth
+                                                                control={control} />
+                                        </Grid>
+                                        <Grid item xs={12} sm={12} md={6} lg={6}>
+                                            <ControlledTextFieldPassword label="Repetir Contraseña"
+                                                                name={AdminDialogFormFields.PasswordRepeat}
+                                                                fullWidth
+                                                                control={control} />
+                                        </Grid>
+                                    </Grid>
+                            }
+
                         </Grid>
                     </DialogContent>
                     <DialogActions>
@@ -168,11 +189,14 @@ export function AdminDialog (props: AdminDialogProps) {
                                 onClick={onHandleClose}
                                 startIcon={<CloseRoundedIcon />}>Cancelar</Button>
 
-                        <Button variant="contained"
-                                color="primary"
-                                size="small"
-                                type="submit"
-                                startIcon={<SaveRoundedIcon />}>Guardar</Button>
+                        {
+                            isNewAdmin &&   
+                                <Button variant="contained"
+                                        color="primary"
+                                        size="small"
+                                        type="submit"
+                                        startIcon={<SaveRoundedIcon />}>Guardar</Button>
+                        }
                     </DialogActions>
                 </form>
             </Dialog>
