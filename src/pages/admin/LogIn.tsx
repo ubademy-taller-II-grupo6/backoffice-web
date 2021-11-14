@@ -53,7 +53,7 @@ export function LogIn () {
     
             setLoading(false);
     
-            window.location.href = "/backoffice-web/"; // Redirecciona a la pagina de inicio
+            window.location.href = "/backoffice-web/admins"; // Redirecciona a la pagina de inicio
         } 
     }
 
@@ -65,7 +65,7 @@ export function LogIn () {
             const auth = getAuth(); 
             let userCredential : UserCredential = await signInWithEmailAndPassword(auth, data.Email, data.Contraseña);
             let userToken : string = await userCredential.user.getIdToken();
-
+            
             await getAdmin(data.Email, userToken);
         } catch (error : any) {
             var errorMessage = firebaseUtils.decodeMessageError(error.code);
