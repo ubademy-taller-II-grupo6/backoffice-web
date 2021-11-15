@@ -24,7 +24,6 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSettingsRounded';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import MenuIcon from '@mui/icons-material/Menu';
 import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
 
@@ -154,23 +153,17 @@ export function HomeLayout(props: HomeLayoutProps) {
                     </DrawerHeader>
                     <Divider />
                     <List>
-                        <MenuItem component={Link} to="/">
-                            <ListItemIcon>
-                                <DashboardRoundedIcon fontSize="medium" />
-                            </ListItemIcon>
-                            <ListItemText primary="Dashboard" />
-                        </MenuItem>
-                        <MenuItem component={Link} to="/">
-                            <ListItemIcon>
-                                <SupervisorAccountRoundedIcon fontSize="medium" />
-                            </ListItemIcon>
-                            <ListItemText primary="Usuarios" />
-                        </MenuItem>
-                        <MenuItem component={Link} to="/admins">
+                        <MenuItem component={Link} to="/admins" sx={{marginTop: '10%'}}>
                             <ListItemIcon>
                                 <AdminPanelSettingsRoundedIcon fontSize="medium" />
                             </ListItemIcon>
                             <ListItemText primary="Administradores" />
+                        </MenuItem>                        
+                        <MenuItem component={Link} to="/users" sx={{marginTop: '10%'}}>
+                            <ListItemIcon>
+                                <SupervisorAccountRoundedIcon fontSize="medium" />
+                            </ListItemIcon>
+                            <ListItemText primary="Usuarios" />
                         </MenuItem>
                     </List>
 

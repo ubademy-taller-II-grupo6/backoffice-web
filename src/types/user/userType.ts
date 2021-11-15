@@ -11,3 +11,11 @@ export interface Administrator {
     email: string,
     isblocked: boolean
 }
+
+export interface User {
+    id: number,
+    name: string,
+    lastname: string,
+    email: string,
+    blocked: boolean
+}
