@@ -26,6 +26,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MenuIcon from '@mui/icons-material/Menu';
 import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
+import AutoAwesomeMotionRoundedIcon from '@mui/icons-material/AutoAwesomeMotionRounded';
 
 import LogoUbademy from 'assets/images/logoUbademy.png';
 
@@ -164,6 +165,12 @@ export function HomeLayout(props: HomeLayoutProps) {
                                 <SupervisorAccountRoundedIcon fontSize="medium" />
                             </ListItemIcon>
                             <ListItemText primary="Usuarios" />
+                        </MenuItem>                        
+                        <MenuItem component={Link} to="/courses" sx={{marginTop: '10%'}}>
+                            <ListItemIcon>
+                                <AutoAwesomeMotionRoundedIcon fontSize="medium" />
+                            </ListItemIcon>
+                            <ListItemText primary="Cursos" />
                         </MenuItem>
                     </List>
 
