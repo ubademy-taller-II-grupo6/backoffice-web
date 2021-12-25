@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { CardHeader, Grid, IconButton, Typography } from '@mui/material';
 import SyncRoundedIcon from '@mui/icons-material/SyncRounded';
 
+import { ChipGold, ChipBronze } from 'components/chips/Chips';
 import { TableList } from 'components/table/Table';
 import { TableColDef } from 'components/table/TableLayouts';
 
@@ -21,10 +22,25 @@ export function CourseList () {
         { field: 'description', headerName: 'Descripción' },
         { field: 'type', headerName: 'Tipo' },
         { field: 'category', headerName: 'Categoría' },
-        { field: 'subscription', headerName: 'Subscrición' },
+        { 
+            field: 'subscription', headerName: 'Subscrición',
+            renderSpecial: (oneCourse: Course) => (
+                <div>
+                    {(() => {
+                        switch(oneCourse.subscription) {
+                            case 'GOLD':
+                                return <ChipGold />
+                            case 'BRONZE':
+                                return <ChipBronze />
+                        }
+                    })()}
+                    
+                </div>
+            )
+        },
         { field: 'location', headerName: 'Ubicación' },
     ]
-
+    
     const searchCourses = () : Promise<ResponseBase<Course[]>> => {
         return HttpCourse.getListCourses();
     };
