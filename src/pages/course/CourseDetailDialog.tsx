@@ -91,6 +91,24 @@ export function CourseDetailDialog (props: CourseDetailDialogProps) {
                             <Grid item xs={12} sm={12} md={6} lg={6} >
                                 <TextField
                                     size="small"
+                                    label="Condiciones de inscripción"
+                                    value={props.course.enrollment_conditions}
+                                    fullWidth
+                                    maxRows={3}
+                                    disabled />
+                            </Grid>
+                            <Grid item xs={12} sm={12} md={6} lg={6} >
+                                <TextField
+                                    size="small"
+                                    label="Condiciones de desinscripción"
+                                    value={props.course.unenrollment_conditions}
+                                    fullWidth
+                                    maxRows={3}
+                                    disabled />
+                            </Grid>
+                            <Grid item xs={12} sm={12} md={6} lg={6} >
+                                <TextField
+                                    size="small"
                                     label="Hashtags"
                                     value={props.course.hashtags}
                                     fullWidth
