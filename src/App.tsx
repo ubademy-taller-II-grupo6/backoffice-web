@@ -7,6 +7,7 @@ import { Home } from 'pages/home/Home';
 import { HomeLayout } from 'layouts/HomeLayout';
 import { AdminList } from 'pages/admin/AdminList';
 import { UserList } from 'pages/user/UserList';
+import { CourseList } from 'pages/course/CourseList';
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                             <Switch>
                                 <PrivateRoute path="/admins" renderComponent={(props) => <AdminList />} />
                                 <PrivateRoute path="/users" renderComponent={(props) => <UserList />} />
+                                <PrivateRoute path="/courses" renderComponent={(props) => <CourseList />} />
                                 <PrivateRoute path="/" renderComponent={(props) => <Home/>} />
                             </Switch>
                         </HomeLayout>

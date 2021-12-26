@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { Button, CardHeader, Grid, IconButton, Typography } from '@mui/material';
+import { Box, Button, CardHeader, Grid, IconButton, Typography } from '@mui/material';
 import CompareArrowsRoundedIcon from '@mui/icons-material/CompareArrowsRounded';
 import SyncRoundedIcon from '@mui/icons-material/SyncRounded';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 import { SnackBarAlertSuccess } from 'components/forms/SnackBarAlert';
 import { TableList } from 'components/table/Table';
@@ -14,6 +15,7 @@ import { ResponseBase } from 'types/reponses/responsesType';
 
 import { HttpUser } from 'http/users/httpUser';
 import { UserChangeStateDialog } from './UserChangeStateDialog';
+import { UserDetailDialog } from './UserDetailDialog';
 
 const orderUser = (oneUser : User, otherUser : User) : number => (oneUser.id > otherUser.id) ? 1 : -1;
 
@@ -22,6 +24,7 @@ export function UserList () {
     const [isLoading, setLoading] = useState<boolean>(true);
     const [listUsers, setListUsers] = useState<User[]>();
     const [changeStateUser, setChangeStateUser] = useState<User>();
+    const [userDetail, setUserDetail] = useState<User>();
     const [msgSuccess, setMsgSuccess] = useState<string>();
 
     const userListColDef : TableColDef[] = [
@@ -44,15 +47,23 @@ export function UserList () {
         { 
             field: 'changeState', headerName: ' ',
             renderSpecial: (oneUser: User) => (
-                <Button variant="contained"
-                        color="primary"
-                        size="small"
-                        onClick={() => { 
-                            setMsgSuccess(undefined);
-                            setChangeStateUser(oneUser);
-                        }}
-                        sx={{zoom: '79%'}}
-                        startIcon={<CompareArrowsRoundedIcon />}>Cambiar estado</Button>
+                <Box>
+                    <Button variant="contained"
+                            color="primary"
+                            size="small"
+                            onClick={() => { 
+                                setMsgSuccess(undefined);
+                                setChangeStateUser(oneUser);
+                            }}
+                            sx={{zoom: '79%'}}
+                            startIcon={<CompareArrowsRoundedIcon />}>Cambiar estado</Button>
+                    <Button variant="contained"
+                            color="primary"
+                            size="small"
+                            onClick={() => { setUserDetail(oneUser) }}
+                            sx={{zoom: '79%', marginLeft: 4}}
+                            startIcon={<SearchRoundedIcon />}>Ver Detalle</Button>
+                </Box>
             )
         }
     ]
@@ -114,6 +125,10 @@ export function UserList () {
             {
                 msgSuccess &&
                     <SnackBarAlertSuccess message={msgSuccess} />
+            }  
+
+            {
+                userDetail && <UserDetailDialog user={userDetail} onCloseDialog={() => setUserDetail(undefined)} />
             }
         </Typography>
     );

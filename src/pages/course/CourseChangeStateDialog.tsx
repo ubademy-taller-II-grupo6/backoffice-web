@@ -1,4 +1,4 @@
-import { useState} from 'react';
+ import { useState} from 'react';
 
 import {
     Button,
@@ -12,22 +12,22 @@ import {
 
 import { LoaderBackdrop } from 'components/loader/LoaderBackdrop';
 
-import { User } from 'types/user/userType';
+import { Course } from 'types/course/courseType';
 
-import { HttpUser } from 'http/users/httpUser';
-
-interface UserChangeStateDialogProps {
-    user: User,
+import { HttpCourse } from 'http/course/httpCourse';
+/*
+interface CourseChangeStateDialogProps {
+    course: Course,
     onCloseDialog: () => void,
     onConfirmDialog: () => void
 }
 
-export function UserChangeStateDialog (props: UserChangeStateDialogProps) {
+export function CourseChangeStateDialog (props: CourseChangeStateDialogProps) {
     const [open, setOpen] = useState<boolean>(true);
     const [isSaving, setSaving] = useState<boolean>(false);
     
     const titleFinal : string = "Atención!";
-    const textContentFinal : string = `Realmente quiere ${props.user.blocked ? "activar" : "bloquear"} el usuario con mail ${props.user.email}?`;
+    const textContentFinal : string = `Realmente quiere ${props.course.blocked ? "activar" : "bloquear"} el usuario con mail ${props.course.email}?`;
 
     const onHandleClose = () => {
         setOpen(false);
@@ -37,15 +37,15 @@ export function UserChangeStateDialog (props: UserChangeStateDialogProps) {
     const onHandleConfirm = async () => {
         setSaving(true);
 
-        if (props.user.blocked) {
-            await HttpUser.activateUser(props.user)
+        if (props.course.blocked) {
+            await HttpCourse.activateCourse(props.course.id)
                     .then(() => {
                         setOpen(false);
                         setSaving(false);
                         props.onConfirmDialog();
                     })
         } else {
-            await HttpUser.blockUser(props.user)
+            await HttpCourse.blockCourse(props.course.id)
                     .then(() => {
                         setOpen(false);
                         setSaving(false);
@@ -86,4 +86,4 @@ export function UserChangeStateDialog (props: UserChangeStateDialogProps) {
             }
         </Typography>
     );
-}
+} */
