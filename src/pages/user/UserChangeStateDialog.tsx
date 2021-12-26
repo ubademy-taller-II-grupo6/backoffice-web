@@ -38,14 +38,14 @@ export function UserChangeStateDialog (props: UserChangeStateDialogProps) {
         setSaving(true);
 
         if (props.user.blocked) {
-            await HttpUser.activateUser(props.user.id)
+            await HttpUser.activateUser(props.user)
                     .then(() => {
                         setOpen(false);
                         setSaving(false);
                         props.onConfirmDialog();
                     })
         } else {
-            await HttpUser.blockUser(props.user.id)
+            await HttpUser.blockUser(props.user)
                     .then(() => {
                         setOpen(false);
                         setSaving(false);
