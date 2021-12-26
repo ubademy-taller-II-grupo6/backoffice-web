@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import { CardHeader, Grid, IconButton, Typography } from '@mui/material';
+import { Button, CardHeader, Grid, IconButton, Typography } from '@mui/material';
 import SyncRoundedIcon from '@mui/icons-material/SyncRounded';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 import { ChipGold, ChipBronze } from 'components/chips/Chips';
 import { TableList } from 'components/table/Table';
@@ -11,11 +12,13 @@ import { Course } from 'types/course/courseType';
 import { ResponseBase } from 'types/reponses/responsesType';
 
 import { HttpCourse } from 'http/course/httpCourse';
+import { CourseDetailDialog } from './CourseDetailDialog';
 
 export function CourseList () {
 
     const [isLoading, setLoading] = useState<boolean>(true);
     const [listCourses, setListCourses] = useState<Course[]>();
+    const [courseDetail, setCourseDetail] = useState<Course>();
 
     const courseListColDef : TableColDef[] = [
         { field: 'title', headerName: 'Título' },
@@ -39,6 +42,17 @@ export function CourseList () {
             )
         },
         { field: 'location', headerName: 'Ubicación' },
+        { 
+            field: 'changeState', headerName: ' ',
+            renderSpecial: (oneCourse: Course) => (
+                <Button variant="contained"
+                        color="primary"
+                        size="small"
+                        onClick={() => { setCourseDetail(oneCourse) }}
+                        sx={{zoom: '79%'}}
+                        startIcon={<SearchRoundedIcon />}>Ver Detalle</Button>
+            )
+        }
     ]
     
     const searchCourses = () : Promise<ResponseBase<Course[]>> => {
@@ -80,6 +94,10 @@ export function CourseList () {
                     <TableList loading={isLoading} dataList={listCourses} columnsDef={courseListColDef} />
                 </Grid>           
             </Grid>    
+
+            {
+                courseDetail && <CourseDetailDialog course={courseDetail} onCloseDialog={() => setCourseDetail(undefined)} />
+            }
         </Typography>
     );
 }
