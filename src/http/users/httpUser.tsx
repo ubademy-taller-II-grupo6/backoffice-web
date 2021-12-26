@@ -7,21 +7,13 @@ export const HttpUser = {
         return HttpAxiosUserBase.get(`users/`);
     },
 
-    activateUser: (userId: number) : Promise<ResponseBase<void>> => {
-        return HttpAxiosUserBase.put(
-            `users/${userId}`,
-            {
-                "blocked": false
-            }
-        );
+    activateUser: (user: User) : Promise<ResponseBase<void>> => {
+        user.blocked = false;
+        return HttpAxiosUserBase.put(`users/${user.id}`, user);
     },
 
-    blockUser: (userId: number) : Promise<ResponseBase<void>> => {
-        return HttpAxiosUserBase.put(
-            `users/${userId}`,
-            {
-                "blocked": true
-            }
-        );
+    blockUser: (user: User) : Promise<ResponseBase<void>> => {
+        user.blocked = true;
+        return HttpAxiosUserBase.put(`users/${user.id}`,user);
     }
 }

@@ -17,5 +17,8 @@ export interface User {
     name: string,
     lastname: string,
     email: string,
-    blocked: boolean
+    blocked: boolean,
+    latitude: string,
+    longitude: string,
+    subscription: string
 }
