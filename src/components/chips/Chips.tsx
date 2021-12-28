@@ -13,10 +13,19 @@ export function ChipBlocked () {
 export function ChipGold () {
     const style = {
         color: '#AF9500',
-        backgroundColor: '#FCEB00',
+        backgroundColor: '#F5F66A',
     };
 
     return <Chip label="GOLD" size="small" color="secondary" style={style} />
+}
+
+export function ChipSilver () {
+    const style = {
+        color: '#514F4F',
+        backgroundColor: '#D7D7D7'
+    };
+
+    return <Chip label="SILVER" size="small" color="secondary" style={style} />
 }
 
 export function ChipBronze () {
@@ -26,4 +35,13 @@ export function ChipBronze () {
     };
 
     return <Chip label="BRONZE" size="small" color="secondary" style={style} />
+}
+
+export function ChipFree () {
+    const style = {
+        color: '#15128E',
+        backgroundColor: '#C2C1FF'
+    };
+
+    return <Chip label="FREE" size="small" color="secondary" style={style} />
 }

@@ -24,6 +24,7 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSettingsRounded';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import MenuIcon from '@mui/icons-material/Menu';
 import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
 import AutoAwesomeMotionRoundedIcon from '@mui/icons-material/AutoAwesomeMotionRounded';
@@ -154,6 +155,12 @@ export function HomeLayout(props: HomeLayoutProps) {
                     </DrawerHeader>
                     <Divider />
                     <List>
+                        <MenuItem component={Link} to="/" sx={{marginTop: '10%'}}>
+                            <ListItemIcon>
+                                <DashboardRoundedIcon fontSize="medium" />
+                            </ListItemIcon>
+                            <ListItemText primary="Dashboard" />
+                        </MenuItem> 
                         <MenuItem component={Link} to="/admins" sx={{marginTop: '10%'}}>
                             <ListItemIcon>
                                 <AdminPanelSettingsRoundedIcon fontSize="medium" />

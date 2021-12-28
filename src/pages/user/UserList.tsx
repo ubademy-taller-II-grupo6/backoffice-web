@@ -8,7 +8,7 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { SnackBarAlertSuccess } from 'components/forms/SnackBarAlert';
 import { TableList } from 'components/table/Table';
 import { TableColDef } from 'components/table/TableLayouts';
-import { ChipActive, ChipBlocked } from 'components/chips/Chips';
+import { ChipActive, ChipBlocked, ChipGold, ChipSilver, ChipBronze, ChipFree } from 'components/chips/Chips';
 
 import { User } from 'types/user/userType';
 import { ResponseBase } from 'types/reponses/responsesType';
@@ -41,6 +41,26 @@ export function UserList () {
                         :
                             <ChipActive />                          
                     }
+                </div>
+            )
+        },
+        { 
+            field: 'subscription', headerName: 'Subscrición',
+            renderSpecial: (oneUser: User) => (
+                <div>
+                    {(() => {
+                        switch(oneUser.subscription) {
+                            case 'GOLD':
+                                return <ChipGold />
+                            case 'SILVER':
+                                return <ChipSilver />
+                            case 'BRONZE':
+                                return <ChipBronze />
+                            case 'FREE':
+                                return <ChipFree />
+                        }
+                    })()}
+                    
                 </div>
             )
         },
