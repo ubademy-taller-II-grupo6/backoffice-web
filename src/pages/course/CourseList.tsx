@@ -4,7 +4,7 @@ import { Button, CardHeader, Grid, IconButton, Typography } from '@mui/material'
 import SyncRoundedIcon from '@mui/icons-material/SyncRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-import { ChipGold, ChipBronze } from 'components/chips/Chips';
+import { ChipGold, ChipSilver, ChipBronze, ChipFree } from 'components/chips/Chips';
 import { TableList } from 'components/table/Table';
 import { TableColDef } from 'components/table/TableLayouts';
 
@@ -22,7 +22,19 @@ export function CourseList () {
 
     const courseListColDef : TableColDef[] = [
         { field: 'title', headerName: 'Título' },
-        { field: 'description', headerName: 'Descripción' },
+        { 
+            field: 'description', headerName: 'Descripción',
+            renderSpecial: (oneCourse: Course) => (
+                <div>
+                    {
+                        oneCourse.description.length > 25 ?
+                            `${oneCourse.description.substring(0, 25)}... `
+                        :
+                            oneCourse.description.substring(0, 25)
+                    }
+                </div>
+            )
+        },
         { field: 'type', headerName: 'Tipo' },
         { field: 'category', headerName: 'Categoría' },
         { 
@@ -33,8 +45,12 @@ export function CourseList () {
                         switch(oneCourse.subscription) {
                             case 'GOLD':
                                 return <ChipGold />
+                            case 'SILVER':
+                                return <ChipSilver />
                             case 'BRONZE':
                                 return <ChipBronze />
+                            case 'FREE':
+                                return <ChipFree />
                         }
                     })()}
                     
